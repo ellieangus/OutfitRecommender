@@ -2,25 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Polka dot background for the outfit display panel */
+/* Base font */
+body {
+  font-family: 'Lora', Georgia, serif;
+  color: #5F0C2F;
+}
+
+/* Polka dot background — Golden Cream base, Light Pink dots */
 .polka-dot-bg {
-  background-color: #fff0f3;
-  background-image: radial-gradient(circle, #ffb3c6 1.5px, transparent 1.5px);
-  background-size: 28px 28px;
+  background-color: #FFF1B5;
+  background-image:
+    radial-gradient(circle, #d292a8 1.8px, transparent 1.8px),
+    radial-gradient(circle, #E5A2A0 1px, transparent 1px);
+  background-size: 30px 30px, 15px 15px;
+  background-position: 0 0, 7px 7px;
 }
 
-/* Smooth emoji cycling */
-@keyframes emojiPop {
-  0%   { opacity: 0; transform: scale(0.7); }
-  20%  { opacity: 1; transform: scale(1.1); }
-  80%  { opacity: 1; transform: scale(1); }
-  100% { opacity: 0; transform: scale(0.7); }
+/* Doodle float — centered loading cluster */
+@keyframes doodleFloat {
+  0%, 100% { transform: translateY(0px);    opacity: 0.85; }
+  50%       { transform: translateY(-18px); opacity: 1;    }
 }
-.emoji-pop {
-  animation: emojiPop 0.5s ease-in-out;
+.doodle-float {
+  animation: doodleFloat ease-in-out infinite;
 }
 
-/* Scrollbar styling */
-::-webkit-scrollbar { width: 6px; }
+@keyframes doodleSpin {
+  0%   { transform: translateY(0px)   rotate(0deg);  opacity: 0.85; }
+  50%  { transform: translateY(-14px) rotate(22deg); opacity: 1;    }
+  100% { transform: translateY(0px)   rotate(0deg);  opacity: 0.85; }
+}
+.doodle-spin {
+  animation: doodleSpin ease-in-out infinite;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar       { width: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #f9a8d4; border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: #d292a8; border-radius: 3px; }

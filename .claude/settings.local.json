@@ -34,7 +34,13 @@
       "Bash(__NEW_LINE_8425fff6ea0c36d8__ \"$PYEXE\" \"$MANAGE\" ingest_clothing --user admin --directory \"$DIR\")",
       "Bash(__NEW_LINE_501902a6bc117d6d__ \"$PYEXE\" \"$MANAGE\" shell -c \":*)",
       "Bash(node --version)",
-      "Bash(npm --version)"
+      "Bash(npm --version)",
+      "Bash(python -c \"import docx; d=docx.Document\\(r''C:\\\\Users\\\\ellie\\\\Downloads\\\\outfit-style-guide.docx''\\); [print\\(p.text\\) for p in d.paragraphs]\")",
+      "Bash(\"/c/Users/ellie/OneDrive/5420 Final Project/5570 Final Project/HackUSU/backend/venv/Scripts/python\" -c \"import docx; d=docx.Document\\(r''C:\\\\Users\\\\ellie\\\\Downloads\\\\outfit-style-guide.docx''\\); [print\\(p.text\\) for p in d.paragraphs]\")",
+      "Bash(\"/c/Users/ellie/OneDrive/5420 Final Project/5570 Final Project/HackUSU/backend/venv/Scripts/pip\" install python-docx)",
+      "Bash(\"/c/Users/ellie/OneDrive/5420 Final Project/5570 Final Project/HackUSU/backend/venv/Scripts/python\" -c \":*)",
+      "Bash(python -c \":*)",
+      "Bash(pip install python-docx)"
     ]
   }
 }

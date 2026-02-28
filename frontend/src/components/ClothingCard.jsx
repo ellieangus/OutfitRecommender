@@ -9,7 +9,7 @@ export default function ClothingCard({ item, onFavorite, onDelete, onClick }) {
       onClick={onClick}
     >
       {/* Photo */}
-      <div className="aspect-square bg-rose-50">
+      <div className="aspect-square bg-[#FFF1B5]/30">
         {image_url ? (
           <img
             src={image_url}
@@ -18,7 +18,7 @@ export default function ClothingCard({ item, onFavorite, onDelete, onClick }) {
             loading="lazy"
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center text-4xl text-rose-200">
+          <div className="w-full h-full flex items-center justify-center text-4xl text-brand-dark/20">
             👗
           </div>
         )}
@@ -30,7 +30,7 @@ export default function ClothingCard({ item, onFavorite, onDelete, onClick }) {
           <button
             onClick={e => { e.stopPropagation(); onFavorite() }}
             className={`p-1.5 rounded-full shadow transition-all
-              ${is_favorite ? 'bg-rose-400 text-white' : 'bg-white/90 text-gray-400 hover:text-rose-400'}`}
+              ${is_favorite ? 'bg-brand-dark text-cream' : 'bg-white/90 text-burgundy/60 hover:text-brand-dark'}`}
           >
             <Heart size={13} fill={is_favorite ? 'currentColor' : 'none'} />
           </button>
@@ -38,7 +38,7 @@ export default function ClothingCard({ item, onFavorite, onDelete, onClick }) {
         {onDelete && (
           <button
             onClick={e => { e.stopPropagation(); onDelete() }}
-            className="p-1.5 rounded-full bg-white/90 text-gray-400 hover:text-red-400 shadow transition-all"
+            className="p-1.5 rounded-full bg-white/90 text-burgundy/60 hover:text-red-400 shadow transition-all"
           >
             <Trash2 size={13} />
           </button>
@@ -46,17 +46,17 @@ export default function ClothingCard({ item, onFavorite, onDelete, onClick }) {
       </div>
 
       {/* Info footer */}
-      <div className="px-2.5 py-2">
-        <p className="text-sm font-medium text-gray-700 capitalize truncate leading-tight">
+      <div className="px-3 py-3">
+        <p className="text-sm font-body font-medium text-burgundy capitalize truncate leading-tight">
           {ai_attributes?.type || category}
         </p>
         {ai_attributes?.color?.length > 0 && (
-          <p className="text-xs text-gray-400 truncate mt-0.5">
+          <p className="text-xs text-burgundy/60 truncate mt-0.5">
             {ai_attributes.color.slice(0, 2).join(', ')}
           </p>
         )}
         {ai_attributes?.formality && (
-          <span className="inline-block mt-1 px-1.5 py-0.5 bg-rose-50 text-rose-400 text-xs rounded-full capitalize">
+          <span className="inline-block mt-1 px-1.5 py-0.5 bg-cream text-brand-dark text-xs rounded-full capitalize">
             {ai_attributes.formality}
           </span>
         )}

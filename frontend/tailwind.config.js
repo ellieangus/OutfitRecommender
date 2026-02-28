@@ -4,15 +4,19 @@ export default {
   theme: {
     extend: {
       colors: {
-        sidebar: '#1a0d13',
-        burgundy: {
-          DEFAULT: '#4A1020',
-          light: '#6B1830',
-          dark: '#2E0A14',
-        },
+        'brand-pink':    '#d292a8',
+        'brand-dark':    '#A92F50',
+        'warm-rose':     '#E5A2A0',
+        'dusty-coral':   '#D3968C',
+        'golden-cream':  '#EDDA8C',
+        'burgundy':      '#5F0C2F',
+        'deep-burgundy': '#670626',
+        'cream':         '#FFF1B5',
+        sidebar:         '#5F0C2F',
       },
       fontFamily: {
-        display: ['Georgia', 'serif'],
+        display: ['"Playfair Display"', 'Georgia', 'serif'],
+        body:    ['Lora', 'Georgia', 'serif'],
       },
     },
   },

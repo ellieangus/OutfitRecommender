@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import api from '../api/client'
 import OutfitCard from '../components/OutfitCard'
 import ClothingCard from '../components/ClothingCard'
+import ItemDetailPanel from '../components/ItemDetailPanel'
 
 const THEMES = [
   { label: 'Neutrals',      occasion: 'neutral tones casual' },
@@ -25,6 +26,7 @@ export default function ExplorePage() {
   const [allItems, setAllItems] = useState([])
   const [loading, setLoading] = useState(false)
   const [loadingItems, setLoadingItems] = useState(true)
+  const [selectedItem, setSelectedItem] = useState(null)
 
   // Load all wardrobe items once for the mood board
   useEffect(() => {
@@ -55,9 +57,9 @@ export default function ExplorePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
-      <h1 className="text-2xl font-semibold text-gray-800 mb-1">Explore</h1>
-      <p className="text-gray-400 text-sm mb-6">Pick a vibe and see how your wardrobe rises to the occasion.</p>
+    <div className="min-h-screen bg-[#fbf0f2] p-10">
+      <h1 className="text-2xl font-display font-bold text-burgundy mb-1">Explore</h1>
+      <p className="font-body text-burgundy/60 text-sm mb-6">Pick a vibe and see how your wardrobe rises to the occasion.</p>
 
       {/* Theme chips */}
       <div className="flex flex-wrap gap-2 mb-8">
@@ -65,10 +67,10 @@ export default function ExplorePage() {
           <button
             key={t.label}
             onClick={() => pickTheme(t)}
-            className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all
+            className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all
               ${theme?.label === t.label
-                ? 'bg-rose-400 text-white shadow-sm'
-                : 'bg-white text-gray-500 border border-gray-200 hover:border-rose-200 hover:text-rose-400'}`}
+                ? 'bg-brand-dark text-cream shadow-sm'
+                : 'bg-white border border-brand-pink/40 text-burgundy/70 hover:border-brand-pink hover:text-brand-dark'}`}
           >
             {t.label}
           </button>
@@ -79,13 +81,15 @@ export default function ExplorePage() {
       {!theme && !loading && (
         <div className="flex flex-col items-center justify-center py-24 text-center select-none">
           <div className="text-6xl mb-4">🎀</div>
-          <p className="text-gray-400 text-sm">Choose a vibe above to start exploring</p>
+          <p className="text-burgundy/50 text-sm">Choose a vibe above to start exploring</p>
         </div>
       )}
 
       {/* Loading */}
       {loading && (
-        <div className="flex items-center justify-center py-24 text-4xl animate-pulse select-none">✨</div>
+        <div className="flex items-center justify-center py-24 select-none">
+          <p className="font-display font-bold text-brand-pink text-2xl animate-pulse">Styling your look...</p>
+        </div>
       )}
 
       {/* Results */}
@@ -94,14 +98,14 @@ export default function ExplorePage() {
 
           {/* Outfit card section */}
           <div>
-            <p className="text-xs text-gray-400 uppercase tracking-widest mb-4">
+            <p className="font-body font-semibold text-burgundy/60 uppercase tracking-widest text-xs mb-4">
               {theme?.label} Outfit
             </p>
-            <div className="max-w-xs">
+            <div className="max-w-sm">
               <OutfitCard outfit={outfit.outfit} />
             </div>
             {outfit.reasoning && (
-              <p className="mt-3 text-rose-700/60 text-sm italic max-w-md">
+              <p className="mt-3 text-burgundy/60 text-sm italic max-w-md">
                 "{outfit.reasoning}"
               </p>
             )}
@@ -110,14 +114,16 @@ export default function ExplorePage() {
           {/* Mood board */}
           {moodItems.length > 0 && (
             <div>
-              <p className="text-xs text-gray-400 uppercase tracking-widest mb-4">
+              <p className="font-body font-semibold text-burgundy/60 uppercase tracking-widest text-xs mb-4">
                 Mood Board
               </p>
-              <div className="columns-2 sm:columns-3 md:columns-4 lg:columns-5 gap-3 space-y-3">
+              <div className="columns-2 sm:columns-3 md:columns-4 lg:columns-5 gap-4 space-y-4">
                 {moodItems.map((item, i) => (
                   <div
                     key={item.id || i}
-                    className={`break-inside-avoid rounded-2xl overflow-hidden bg-white shadow-sm
+                    onClick={() => setSelectedItem(item)}
+                    className={`break-inside-avoid rounded-2xl overflow-hidden bg-white shadow hover:shadow-lg
+                      cursor-pointer hover:scale-[1.02] transition-all duration-200
                       ${i % 3 === 0 ? 'aspect-square' : i % 3 === 1 ? 'aspect-[3/4]' : 'aspect-[4/3]'}`}
                   >
                     {item.image_url ? (
@@ -128,7 +134,7 @@ export default function ExplorePage() {
                         loading="lazy"
                       />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center text-4xl text-rose-100">
+                      <div className="w-full h-full flex items-center justify-center text-4xl text-brand-pink/40">
                         👗
                       </div>
                     )}
@@ -139,6 +145,12 @@ export default function ExplorePage() {
           )}
         </div>
       )}
+
+      {/* ── Detail panel ── */}
+      <ItemDetailPanel
+        item={selectedItem}
+        onClose={() => setSelectedItem(null)}
+      />
     </div>
   )
 }

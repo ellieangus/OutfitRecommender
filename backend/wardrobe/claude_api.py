@@ -43,13 +43,45 @@ def _get_client():
 
 
 def _parse_json_response(text: str) -> dict:
-    """Strip markdown code fences if Claude wraps the JSON, then parse."""
+    """
+    Robustly extract and parse JSON from Claude's response.
+
+    Handles these real-world cases:
+    - Plain JSON (ideal)
+    - JSON wrapped in ```json ... ``` code fence
+    - Code fence with extra prose after the closing ```
+    - JSON followed by trailing explanation text (no fence)
+    """
     text = text.strip()
+
+    # 1. Strip markdown code fence, stopping at the FIRST closing ```
+    #    (ignores any prose Claude appends after the fence)
     if text.startswith('```'):
         lines = text.split('\n')
-        # Remove first line (```json or ```) and last line (```)
-        text = '\n'.join(lines[1:-1])
-    return json.loads(text)
+        inner = []
+        for line in lines[1:]:          # skip opening ```[json]
+            if line.strip() == '```':
+                break                   # stop at closing fence, drop anything after
+            inner.append(line)
+        text = '\n'.join(inner).strip()
+
+    # 2. Try a direct parse — works when text is clean JSON
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError:
+        pass
+
+    # 3. Fallback: extract the outermost { ... } block.
+    #    Handles "here is the JSON: {...} let me know if..." style responses.
+    start = text.find('{')
+    end = text.rfind('}')
+    if start != -1 and end > start:
+        try:
+            return json.loads(text[start:end + 1])
+        except json.JSONDecodeError:
+            pass
+
+    raise ValueError(f'No valid JSON found in Claude response: {text[:300]}')
 
 
 def _get_image_media_type(path: str) -> str:
@@ -180,7 +212,7 @@ def generate_outfit(occasion: str, wardrobe_items) -> dict:
 Here is their wardrobe (JSON array of clothing items): {wardrobe_json}
 Recommend a complete outfit by selecting item IDs from the wardrobe.
 Return a JSON object with: selected_item_ids (array of integers), outfit_name (string), reasoning (1–2 sentences).
-Return only valid JSON."""
+Return only valid JSON, no explanation. Start your response with {{ and end with }}."""
 
     message = client.messages.create(
         model=settings.CLAUDE_MODEL,
@@ -217,7 +249,7 @@ Return a JSON object with:
 - outfits (array, each with: selected_item_ids (array of integers), outfit_name (string), reasoning (string))
 - overall_verdict (string): 1–2 sentences on how versatile this item is with their wardrobe
 
-Return only valid JSON."""
+Return only valid JSON, no explanation. Start your response with {{ and end with }}."""
 
     message = client.messages.create(
         model=settings.CLAUDE_MODEL,
