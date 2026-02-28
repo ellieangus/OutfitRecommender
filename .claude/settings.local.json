@@ -1,0 +1,40 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -m venv backend/venv)",
+      "Bash(backend/venv/Scripts/pip install Django djangorestframework django-cors-headers Pillow anthropic python-dotenv)",
+      "Bash(venv/Scripts/django-admin startproject outfit_project .)",
+      "Bash(venv/Scripts/python manage.py startapp wardrobe)",
+      "Bash(venv/Scripts/python manage.py makemigrations)",
+      "Bash(venv/Scripts/python manage.py migrate)",
+      "Bash(venv/Scripts/python manage.py check)",
+      "Bash(unzip -o \"/c/Users/ellie/Downloads/HackUSU Drive-20260228T033719Z-1-001.zip\" -d backend/media/clothing/raw/)",
+      "Bash(venv/Scripts/pip install pillow-heif)",
+      "Bash(DJANGO_SUPERUSER_USERNAME=admin DJANGO_SUPERUSER_EMAIL=admin@hackusu.com DJANGO_SUPERUSER_PASSWORD=admin123 venv/Scripts/python manage.py createsuperuser --noinput)",
+      "Bash(export DJANGO_SUPERUSER_USERNAME=admin DJANGO_SUPERUSER_EMAIL=admin@hackusu.com DJANGO_SUPERUSER_PASSWORD=admin123)",
+      "Bash(\"backend/venv/Scripts/python.exe\" backend/manage.py createsuperuser --noinput)",
+      "Bash(ls backend/venv/Scripts/python*)",
+      "Bash(DJANGO_SUPERUSER_USERNAME=admin DJANGO_SUPERUSER_EMAIL=admin@hackusu.com DJANGO_SUPERUSER_PASSWORD=admin123 ./venv/Scripts/python.exe manage.py createsuperuser --noinput)",
+      "Bash(./venv/Scripts/python.exe manage.py ingest_clothing --user admin --directory \"media/clothing/raw/HackUSU Drive\")",
+      "Bash(PYEXE=\"/c/Users/ellie/OneDrive/5420 Final Project/5570 Final Project/HackUSU/backend/venv/Scripts/python.exe\")",
+      "Bash(MANAGE=\"/c/Users/ellie/OneDrive/5420 Final Project/5570 Final Project/HackUSU/backend/manage.py\")",
+      "Bash(DIR=\"/c/Users/ellie/OneDrive/5420 Final Project/5570 Final Project/HackUSU/backend/media/clothing/raw/HackUSU Drive\")",
+      "Bash(__NEW_LINE_ff6356c5090be31e__ \"$PYEXE\" \"$MANAGE\" ingest_clothing --user admin --directory \"$DIR\")",
+      "Bash(__NEW_LINE_ecd7af8cb0c10a36__ \"$PYEXE\" \"$MANAGE\" shell -c \":*)",
+      "Bash(__NEW_LINE_a3d43ce3968c342a__ \"$PYEXE\" \"$MANAGE\" ingest_clothing --user admin --directory \"$DIR\")",
+      "Bash(__NEW_LINE_bcf0e314bb34adfd__ \"$PYEXE\" \"$MANAGE\" shell -c \":*)",
+      "Bash(__NEW_LINE_345e308cd3c5b66a__ \"$PYEXE\" \"$MANAGE\" shell -c \":*)",
+      "Bash(__NEW_LINE_0cee7fff6c5c409a__ \"$PYEXE\" -c \":*)",
+      "Bash(__NEW_LINE_22ca20a4a0d52216__ \"$PYEXE\" \"$MANAGE\" shell -c \":*)",
+      "Bash(__NEW_LINE_3a68c5ed0b010c0c__ \"$PYEXE\" \"$MANAGE\" shell -c \":*)",
+      "Bash(__NEW_LINE_de36860b356da556__ \"$PYEXE\" \"$MANAGE\" ingest_clothing --user admin --directory \"$DIR\")",
+      "Bash(__NEW_LINE_5fd24bc8de7f40b4__ \"$PYEXE\" \"$MANAGE\" shell -c \":*)",
+      "Bash(__NEW_LINE_a0c32f7b1ef00313__ \"$PYEXE\" \"$MANAGE\" ingest_clothing --user admin --directory \"$DIR\")",
+      "Bash(__NEW_LINE_43ee05675f4e6a09__ \"$PYEXE\" \"$MANAGE\" shell -c \":*)",
+      "Bash(__NEW_LINE_8425fff6ea0c36d8__ \"$PYEXE\" \"$MANAGE\" ingest_clothing --user admin --directory \"$DIR\")",
+      "Bash(__NEW_LINE_501902a6bc117d6d__ \"$PYEXE\" \"$MANAGE\" shell -c \":*)",
+      "Bash(node --version)",
+      "Bash(npm --version)"
+    ]
+  }
+}

@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Polka dot background for the outfit display panel */
+.polka-dot-bg {
+  background-color: #fff0f3;
+  background-image: radial-gradient(circle, #ffb3c6 1.5px, transparent 1.5px);
+  background-size: 28px 28px;
+}
+
+/* Smooth emoji cycling */
+@keyframes emojiPop {
+  0%   { opacity: 0; transform: scale(0.7); }
+  20%  { opacity: 1; transform: scale(1.1); }
+  80%  { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.7); }
+}
+.emoji-pop {
+  animation: emojiPop 0.5s ease-in-out;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #f9a8d4; border-radius: 3px; }
